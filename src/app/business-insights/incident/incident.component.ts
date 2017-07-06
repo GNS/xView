@@ -5,26 +5,27 @@ import {SelectItem} from 'primeng/primeng';
 @Component({
   selector: 'app-incident',
   templateUrl: './incident.component.html',
-  styleUrls: ['./incident.component.css']
+  styleUrls: ['./incident.component.scss']
 })
 export class IncidentComponent implements OnInit {
 
   public snowData;
   private snowErr = false;
+  loadingWheel = "<i class='fa fa-spinner fa-pulse fa-fw'></i>";
 
   duration: SelectItem[];
-  selectedDur = 5000000;
+  selectedDur = 1440;
 
   constructor(private _snowSvc: SnowAggsService) {
       this.duration = [
-        {label:'Daily', value:250},
-        {label:'Weekly', value:500},
-        {label:'Monthly', value:5000000}
+        {label:'Daily', value:1440},
+        {label:'Weekly', value:10080},
+        {label:'Monthly', value:44640}
       ];
 
       setInterval(() => {
         this.getSnowAggs();
-      }, 10000);
+      }, 60000);
   }
 
   ngOnInit() {
@@ -40,11 +41,14 @@ export class IncidentComponent implements OnInit {
 
   changeDuration(){
     this.snowData = {
-    "data": [
-        {"aggs_by_active": { "closed": "<i class='fa fa-spinner fa-pulse fa-fw'></i>", "open": "<i class='fa fa-spinner fa-pulse fa-fw'></i>", "total": "<i class='fa fa-spinner fa-pulse fa-fw'></i>"}},
-        {"aggs_by_priority": {}},
-        {"p1_incidents": [],"total": "<i class='fa fa-spinner fa-pulse fa-fw'></i>"}
-    ]};
+      "data": [
+        { "aggs_by_active": { "closed": "<i class='fa fa-spinner fa-pulse fa-fw'></i>", "open": "<i class='fa fa-spinner fa-pulse fa-fw'></i>", "total": "<i class='fa fa-spinner fa-pulse fa-fw'></i>" } },
+        { "aggs_by_priority": {} },
+        { "p1_incidents": [], "total": "<i class='fa fa-spinner fa-pulse fa-fw'></i>" },
+        { "sla_stats": { "missedSlaCount":"<i class='fa fa-spinner fa-pulse fa-fw'></i>", "aboutToMissSlaCount": "<i class='fa fa-spinner fa-pulse fa-fw'></i>" }}
+
+      ]
+    };
 
     this.getSnowAggs();
   }

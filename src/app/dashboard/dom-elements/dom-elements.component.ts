@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { DashboardService } from '../dashboard.service';
+import { DashboardService } from '../../services/dashboard.service';
 
 @Component({
   selector: 'app-dom-elements',
   templateUrl: './dom-elements.component.html',
-  styleUrls: ['./dom-elements.component.css'],
+  styleUrls: ['./dom-elements.component.scss'],
   providers: [DashboardService]
 })
 export class DomElementsComponent implements OnInit {
@@ -33,33 +33,20 @@ export class DomElementsComponent implements OnInit {
     title: {
       display: true,
       text: 'DOM Elements',
-      fontColor: '#FEC44F',
       fontSize: 24
-    },
-    legend: {
-      display: true,
-      labels: {
-        fontColor: '#FEC44F'
-      }
     },
     scales: {
       xAxes: [{
         gridLines: {
           display: false,
-        },
-        ticks: {
-          fontColor: "#F8F8DD", // this here
-        },
+        }
       }],
       yAxes: [{
         display: true,
         gridLines: {
           display: false,
-        },
-        ticks: {
-          fontColor: "#F8F8DD"
         }
-      }],
+      }]
     }
   };
 
